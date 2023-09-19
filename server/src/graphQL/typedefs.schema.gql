@@ -8,9 +8,13 @@ type User {
   address: String!
   phone: String!
   password: String!
-  createdAt: Date
-  updatedAt: Date
+  products: [Product]
+  purchases: [Purchase]
+  rentals: [Rental]
+  createdAt: Date!
+  updatedAt: Date!
 }
+
 input ProductInput {
   title: String!
   categories: [ID!]!
@@ -21,12 +25,29 @@ input ProductInput {
 type Product {
   id: ID!
   title: String!
+  description: String!
   price: Float
   rent: Float
   rentInterval: String
-  createdAt: Date
   categories: [Category]
+  createdAt: Date!
+  updatedAt: Date!
+  ownerId: ID!
+  owner: User!
+  purchases: [Purchase]
+  rentals: [Rental]
 }
+
+input ProductInput {
+  title: String!
+  description: String!
+  categories: [ID!]
+  price: Float!
+  rent: Float!
+  rentInterval: String!
+  ownerId: String!
+}
+
 type Category {
   id: Int!
   name: String!
@@ -38,10 +59,31 @@ input CategoryInput {
   id: Int!
 }
 
+type Purchase{
+  id: ID!
+  userId: ID!
+  user: User!
+  productId: ID!
+  product: Product!
+  createdAt: Date!
+}
+
+type Rental {
+  id: ID!
+  userId: ID!
+  user: User!
+  productId: ID!
+  product: Product!
+  startDate: String!
+  endDate: Date!
+  createdAt: Date!
+}
+
 type Query {
   getUsers: [User]
   getProducts: [Product]
   getCategories: [Category]
+  loginUser(email: String!, password: String!): User
 }
 type Mutation {
   createUser(
@@ -52,12 +94,6 @@ type Mutation {
     phone: String!
     password: String!
   ): User
-  createProduct(
-    title: String!
-    categories: [Int]
-    price: Float!
-    rent: Float!
-    rentInterval: String!
-  ): Product!
+  createProduct(input: ProductInput!): Product!
   createCategory(name: String!, productId: ID): Category
 }
