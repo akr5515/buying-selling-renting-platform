@@ -59,7 +59,7 @@ input CategoryInput {
   id: Int!
 }
 
-type Purchase{
+type Purchase {
   id: ID!
   userId: ID!
   user: User!
