@@ -1,1 +1,1 @@
-# tee-bay-buying-selling-renting-platform
+# teebay-buying-selling-renting-platform
