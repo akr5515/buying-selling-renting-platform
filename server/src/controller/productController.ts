@@ -1,17 +1,36 @@
 import prisma from "../config/database";
 
 class productController {
-  async createProduct(title, price, rent, rentInterval, categories) {
-    // const chats = await prisma.chat.findMany({});
+  async createProduct(input) {
+    const {
+      title,
+      description,
+      categories,
+      price,
+      rent,
+      rentInterval,
+      ownerId,
+    } = input;
+    console.log("the input is ", input);
     const product = await prisma.product.create({
       data: {
         title,
         price,
+        description,
         rent,
         rentInterval,
+        ownerId,
         categories: {
-          connect: categories.map((categoryId) => ({ id: categoryId })),
+          connect: categories.map((categoryId) => ({
+            id: parseInt(categoryId),
+          })),
         },
+      },
+      include: {
+        categories: true,
+        owner: true,
+        purchase: true,
+        rental: true,
       },
     });
     // console.log("From controller ", product);

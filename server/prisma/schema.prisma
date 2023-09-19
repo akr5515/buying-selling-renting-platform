@@ -45,8 +45,8 @@ model Product {
   rentInterval String
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
-  Purchase     Purchase[]
-  Rental       Rental[]
+  purchase     Purchase[]
+  rental       Rental[]
   ownerId      String
   owner        User       @relation(fields: [ownerId], references: [id])
 }
