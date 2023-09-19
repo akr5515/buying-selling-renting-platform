@@ -54,10 +54,10 @@ type Mutation {
   ): User
   createProduct(
     title: String!
-    categories: [Int!]!
+    categories: [Int]
     price: Float!
     rent: Float!
     rentInterval: String!
   ): Product!
-  createCategory(name: String!, productId: ID!): Category
+  createCategory(name: String!, productId: ID): Category
 }

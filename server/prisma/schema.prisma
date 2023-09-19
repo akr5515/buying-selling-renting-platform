@@ -11,58 +11,57 @@ datasource db {
 }
 
 model Category {
-  id        Int       @id @default(autoincrement())
-  name      String    @unique
-  productId String
-  product   Product[]
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  productId String?
+  product   Product? @relation(fields: [productId], references: [id])
 }
 
 model Purchase {
   id        String   @id @default(uuid())
   userId    String
-  // user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
   productId String
-  // product   Product  @relation(fields: [productId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
   createdAt DateTime @default(now())
 }
 
 model Rental {
-  id        String @id @default(uuid())
+  id        String   @id @default(uuid())
   userId    String
-  // user      User   @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
   productId String
-  // product   Product @relation(fields: [productId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now())
 }
 
 model Product {
   id           String     @id @default(uuid())
   title        String
-  // description  String
+  description  String
   categories   Category[]
   price        Float
   rent         Float
   rentInterval String
-  isDeleted    Boolean    @default(false)
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
-  // ownerId      String
-  // owner        User       @relation(fields: [ownerId], references: [id])
-  // purchases    Purchase[]
-  // rentals      Rental[]
+  Purchase     Purchase[]
+  Rental       Rental[]
+  ownerId      String
+  owner        User       @relation(fields: [ownerId], references: [id])
 }
 
 model User {
-  id        String    @id @default(uuid())
+  id        String     @id @default(uuid())
   firstName String?
   lastName  String?
-  email     String?   @unique
+  email     String?    @unique
   address   String?
   phone     String?
   password  String?
-  // activation Boolean?
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @updatedAt
-  // products   Product[]
-  // purchases  Purchase[]
-  // rentals    Rental[]
+  createdAt DateTime?  @default(now())
+  updatedAt DateTime?  @updatedAt
+  products  Product[]
+  purchases Purchase[]
+  rentals   Rental[]
 }

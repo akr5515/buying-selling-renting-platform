@@ -14,8 +14,8 @@ class productController {
         },
       },
     });
-    console.log("From controller ", product);
-    return { title };
+    // console.log("From controller ", product);
+    return product;
   }
 
   async getAllProducts() {
