@@ -1,0 +1,63 @@
+scalar Date
+
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  address: String!
+  phone: String!
+  password: String!
+  createdAt: Date
+  updatedAt: Date
+}
+input ProductInput {
+  title: String!
+  categories: [ID!]!
+  price: Float!
+  rent: Float!
+  rentInterval: String!
+}
+type Product {
+  id: ID!
+  title: String!
+  price: Float
+  rent: Float
+  rentInterval: String
+  createdAt: Date
+  categories: [Category]
+}
+type Category {
+  id: Int!
+  name: String!
+  Product: Product
+  productId: ID
+}
+
+input CategoryInput {
+  id: Int!
+}
+
+type Query {
+  getUsers: [User]
+  getProducts: [Product]
+  getCategories: [Category]
+}
+type Mutation {
+  createUser(
+    firstName: String!
+    lastName: String!
+    email: String!
+    address: String!
+    phone: String!
+    password: String!
+  ): User
+  createProduct(
+    title: String!
+    categories: [Int!]!
+    price: Float!
+    rent: Float!
+    rentInterval: String!
+  ): Product!
+  createCategory(name: String!, productId: ID!): Category
+}
