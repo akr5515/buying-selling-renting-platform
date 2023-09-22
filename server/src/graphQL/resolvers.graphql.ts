@@ -1,4 +1,3 @@
-import prisma from "../config/database";
 import ProductController from "../controller/productController";
 import UserController from "../controller/userController";
 
@@ -26,7 +25,7 @@ const customResolvers = {
 
       return data;
     },
-    createCategory: async (parent, { name, productId }) => {
+    createCategory: async (parent, { name }) => {
       const data = await ProductController.createCategory(name);
 
       return data;
@@ -38,23 +37,15 @@ const customResolvers = {
       const data = await UserController.getAllUsers();
       return data;
     },
+    getProductById: async (_, args) => {
+      const { productId } = args;
+      const data = await ProductController.getProductById(productId);
+      return data;
+    },
     loginUser: async (_, args) => {
-      console.log("The email", args);
-      const { email } = args;
-      const user = await prisma.user.findUnique({
-        where: { email },
-      });
-
-      if (!user) {
-        throw new Error("User not found");
-      }
-
-      // will add bcrypt & jwt later
-      if (user.password !== args.password) {
-        throw new Error("Invalid password");
-      }
-
-      return user;
+      const { email, password } = args;
+      const data = await UserController.loginUser(email, password);
+      return data;
     },
     getProducts: async () => {
       const data = await ProductController.getAllProducts();

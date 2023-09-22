@@ -21,6 +21,23 @@ class userController {
     const usersList = await prisma.user.findMany();
     return usersList;
   }
+
+  async loginUser(email, password) {
+    const user = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    // will add bcrypt & jwt later
+    if (user.password !== password) {
+      throw new Error("Invalid password");
+    }
+
+    return user;
+  }
 }
 
 const UserController = new userController();

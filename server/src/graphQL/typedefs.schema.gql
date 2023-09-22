@@ -80,10 +80,16 @@ type Rental {
 }
 
 type Query {
+  loginUser(email: String!, password: String!): User
   getUsers: [User]
   getProducts: [Product]
+  getProductById(productId: String!): Product
   getCategories: [Category]
-  loginUser(email: String!, password: String!): User
+  productsCreatedByUser(userId: String!): [Product]
+  productsPurchasedByUser(userId: String!): [Purchase]
+  productsSoldByUser(userId: String!): [Product]
+  productsLentByUser(userId: String!): [Product]
+  productsRentedByUser(userId: String!): [Rental]
 }
 type Mutation {
   createUser(
@@ -96,4 +102,11 @@ type Mutation {
   ): User
   createProduct(input: ProductInput!): Product!
   createCategory(name: String!, productId: ID): Category
+  buyProduct(userId: String!, productId: String!): Purchase!
+  rentProduct(
+    userId: String!
+    productId: String!
+    startDate: String!
+    endDate: String!
+  ): Rental!
 }
