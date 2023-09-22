@@ -1,0 +1,41 @@
+$border-color: #c2cfd9;
+
+.container{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+
+    .login-container{
+        height: 50%;
+        width: 60%;
+        // width: 1400px;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+
+        h1{
+            text-align: center;
+        }
+
+        .login-input-containers{
+            height: 700px;
+            border: 1px solid $border-color;
+            border-radius: 5px;
+            // width: 70%;
+            width: 500px;
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+
+        }
+        
+    }
+}
+
+.text-input{
+    .MuiInputBase-root{
+        height: 90%;
+        // margin-top: 10px;
+    }
+  
+}
