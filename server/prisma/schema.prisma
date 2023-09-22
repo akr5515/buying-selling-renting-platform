@@ -11,28 +11,29 @@ datasource db {
 }
 
 model Category {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique
-  productId String?
-  product   Product? @relation(fields: [productId], references: [id])
+  id      Int       @id @default(autoincrement())
+  name    String    @unique
+  product Product[]
 }
 
 model Purchase {
   id        String   @id @default(uuid())
-  userId    String
   user      User     @relation(fields: [userId], references: [id])
-  productId String
+  userId    String
   product   Product  @relation(fields: [productId], references: [id])
+  productId String
   createdAt DateTime @default(now())
 }
 
 model Rental {
   id        String   @id @default(uuid())
-  userId    String
   user      User     @relation(fields: [userId], references: [id])
-  productId String
+  userId    String
   product   Product  @relation(fields: [productId], references: [id])
+  productId String
   createdAt DateTime @default(now())
+  startDate DateTime
+  endDate   DateTime
 }
 
 model Product {
@@ -47,8 +48,8 @@ model Product {
   updatedAt    DateTime   @updatedAt
   purchase     Purchase[]
   rental       Rental[]
-  ownerId      String
   owner        User       @relation(fields: [ownerId], references: [id])
+  ownerId      String
 }
 
 model User {

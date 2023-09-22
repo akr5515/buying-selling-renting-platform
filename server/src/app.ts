@@ -25,43 +25,6 @@ app.get("/", (req, res) => {
 async function main() {
   await prisma.$connect();
 
-  // const server = new ApolloServer({
-  //   typeDefs: `
-  //       type User {
-  //           name: String!
-  //       }
-  //       type Product {
-  //         id: ID!
-  //         title: String!
-  //       }
-  //       type Query {
-  //           getUsers: [User]
-  //           getProducts: [Product]
-  //       }
-  //       type Mutation {
-  //         createProduct(title: String!): Product
-  //       }
-  //   `,
-  //   resolvers: {
-  //     Mutation: {
-  //       createProduct: async (parent: any, { title }: { title: string }) => {
-  //         // console.log(name, price);
-  //         // return { name, price };
-  //         const data = await ProductController.createProduct(title);
-  //         return data;
-  //       },
-  //     },
-
-  //     Query: {
-  //       getUsers: () => [{ name: "Angkon" }],
-  //       getProducts: async () => {
-  //         const data = await ProductController.getAllProducts();
-  //         return data;
-  //       },
-  //     },
-  //   },
-  // });
-
   const server = new ApolloServer({
     typeDefs: schemaFileContent,
     resolvers: customResolvers,
@@ -72,7 +35,7 @@ async function main() {
 
   await server.start();
 
-  app.use("/graphql", expressMiddleware(server));
+  app.use("/graphql/v1", expressMiddleware(server));
   app.listen(process.env.PORT ? process.env.PORT : 8000, () => {
     console.log(
       `Application is running on ${process.env.PORT ? process.env.PORT : 8000}`

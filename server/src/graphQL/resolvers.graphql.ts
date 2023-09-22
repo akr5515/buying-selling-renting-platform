@@ -27,7 +27,7 @@ const customResolvers = {
       return data;
     },
     createCategory: async (parent, { name, productId }) => {
-      const data = await ProductController.createCategory(name, productId);
+      const data = await ProductController.createCategory(name);
 
       return data;
     },
