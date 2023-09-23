@@ -29,8 +29,8 @@ const SIGN_UP_USER = gql`
 `;
 
 const SignUpPage = () => {
-  const [createUser, { data, loading }] = useMutation(SIGN_UP_USER);
-  console.log("The graph data is ", data, " and loading state ", loading);
+  const [createUser, { data, loading, error }] = useMutation(SIGN_UP_USER);
+  console.log("The graph data is ", data, " and error state ", error);
 
   const { handleSubmit, control } = useForm({
     defaultValues: {

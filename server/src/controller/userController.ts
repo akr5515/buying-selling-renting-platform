@@ -2,19 +2,23 @@ import prisma from "../config/database";
 
 class userController {
   async createUser(firstName, lastName, email, address, phone, password) {
-    // const chats = await prisma.chat.findMany({});
-    const user = await prisma.user.create({
-      data: {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        address: address,
-        phone: phone,
-        password: password,
-      },
-    });
-    console.log("From controller ", user);
-    return user;
+    try {
+      const user = await prisma.user.create({
+        data: {
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          address: address,
+          phone: phone,
+          password: password,
+        },
+      });
+      console.log("From controller ", user);
+      return user;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
   }
 
   async getAllUsers() {

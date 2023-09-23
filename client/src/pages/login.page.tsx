@@ -2,7 +2,22 @@ import React from "react";
 import "./login.style.scss";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
+import { gql, useQuery } from "@apollo/client";
+
+const LOGIN_USER = gql`
+  query LoginUser($email: String!, $password: String!) {
+    loginUser(email: $email, password: $password) {
+      id
+      firstName
+      lastName
+      email
+    }
+  }
+`;
+
 const LoginPage = () => {
+  const { data, error, loading, refetch } = useQuery(LOGIN_USER);
+
   const { handleSubmit, control } = useForm({
     defaultValues: {
       email: "",
@@ -10,13 +25,24 @@ const LoginPage = () => {
     },
   });
 
+  const onClickHandler = async (data) => {
+    const { email, password } = data;
+    try {
+      const loginData = await refetch({ email, password });
+
+      console.log("The login user", loginData.data);
+    } catch (error) {
+      console.log("Some error occured", error);
+    }
+  };
+
   return (
     <Box className="container">
       <Box className="login-container">
         <Typography variant="h4">SIGN IN</Typography>
         <form
           className="login-input-containers"
-          onSubmit={handleSubmit((data) => console.log(data))}
+          onSubmit={handleSubmit((data) => onClickHandler(data))}
         >
           <Controller
             control={control}
