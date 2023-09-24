@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const HeaderComponent = () => {
   const navigate = useNavigate();
+  const userId = localStorage.getItem("userId");
   const navItems = [
     { name: "All Products", path: "/all-products" },
     { name: "My Products", path: "/my-products" },
@@ -13,15 +14,6 @@ const HeaderComponent = () => {
   return (
     <AppBar component="nav">
       <Toolbar>
-        {/* <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
-          >
-            <MenuIcon />
-          </IconButton> */}
         <Typography
           variant="h6"
           component="div"
@@ -29,22 +21,24 @@ const HeaderComponent = () => {
         >
           TeeBay
         </Typography>
-        <Box sx={{ display: { xs: "none", sm: "block" } }}>
-          {navItems.map((item, i) => (
-            <Button
-              key={i}
-              sx={{ color: "#fff" }}
-              onClick={() => {
-                navigate(item.path);
-                if (item.name === "Logout") {
-                  localStorage.removeItem("userId");
-                }
-              }}
-            >
-              {item.name}
-            </Button>
-          ))}
-        </Box>
+        {userId && (
+          <Box sx={{ display: { xs: "none", sm: "block" } }}>
+            {navItems.map((item, i) => (
+              <Button
+                key={i}
+                sx={{ color: "#fff" }}
+                onClick={() => {
+                  navigate(item.path);
+                  if (item.name === "Logout") {
+                    localStorage.removeItem("userId");
+                  }
+                }}
+              >
+                {item.name}
+              </Button>
+            ))}
+          </Box>
+        )}
       </Toolbar>
     </AppBar>
   );

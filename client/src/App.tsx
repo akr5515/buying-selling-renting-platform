@@ -7,6 +7,7 @@ import MyProducts from "./pages/myProducts.page";
 import HeaderComponent from "./components/header.comonent";
 import { Box } from "@mui/material";
 import AddProduct from "./pages/addProduct.page";
+import AuthRoute from "./utils/authRoute";
 
 function App() {
   return (
@@ -16,9 +17,11 @@ function App() {
         <Routes>
           <Route path="/sign-in" element={<LoginPage />} />
           <Route path="/sign-up" element={<SignUpPage />} />
-          <Route path="/all-products" element={<AllProducts />} />
-          <Route path="/my-products" element={<MyProducts />} />
-          <Route path="/add-product" element={<AddProduct />} />
+          <Route element={<AuthRoute />}>
+            <Route path="/all-products" element={<AllProducts />} />
+            <Route path="/my-products" element={<MyProducts />} />
+            <Route path="/add-product" element={<AddProduct />} />
+          </Route>
         </Routes>
       </Box>
     </>

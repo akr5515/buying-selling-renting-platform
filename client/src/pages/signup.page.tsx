@@ -2,6 +2,7 @@ import { gql, useMutation } from "@apollo/client";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 const SIGN_UP_USER = gql`
   mutation createUser(
@@ -29,6 +30,7 @@ const SIGN_UP_USER = gql`
 `;
 
 const SignUpPage = () => {
+  const navigate = useNavigate();
   const [createUser, { data, loading, error }] = useMutation(SIGN_UP_USER);
   console.log("The graph data is ", data, " and error state ", error);
 
@@ -146,6 +148,11 @@ const SignUpPage = () => {
           >
             Register
           </Button>
+
+          <Box>
+            <Typography>Already have an account?</Typography>{" "}
+            <Button onClick={() => navigate("/sign-in")}>Signin</Button>
+          </Box>
         </form>
       </Box>
     </Box>

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./signin.style.scss";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { gql, useQuery } from "@apollo/client";
+import { useNavigate } from "react-router-dom";
+import LoadingComponent from "../components/loading.component";
 
 const LOGIN_USER = gql`
   query LoginUser($email: String!, $password: String!) {
@@ -16,32 +18,41 @@ const LOGIN_USER = gql`
 `;
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const { data, error, loading, refetch } = useQuery(LOGIN_USER);
 
-  const { handleSubmit, control } = useForm({
+  const { handleSubmit, control, getValues } = useForm({
     defaultValues: {
       email: "",
       password: "",
     },
   });
 
+  console.log("loading state ", loading);
+  const [loadingState, setLoadingState] = useState(false);
+
   const onClickHandler = async (data) => {
     const { email, password } = data;
+    setLoadingState(true);
     try {
       const loginData = await refetch({ email, password });
 
-      console.log("The login user", loginData.data);
       localStorage.setItem(
         "userId",
         loginData.data.loginUser.id ? loginData.data.loginUser.id : ""
       );
+      if (loginData.data) {
+        navigate("/all-products");
+      }
     } catch (error) {
       console.log("Some error occured", error);
     }
+    setLoadingState(false);
   };
 
   return (
     <Box className="container">
+      {loadingState && <LoadingComponent />}
       <Box className="login-container">
         <Typography variant="h4">SIGN IN</Typography>
         <form
@@ -64,7 +75,6 @@ const LoginPage = () => {
               <TextField label="Password" className="text-input" {...field} />
             )}
           />
-
           <Button
             variant="contained"
             type="submit"
@@ -72,6 +82,10 @@ const LoginPage = () => {
           >
             Sign In
           </Button>
+          <Box>
+            <Typography>Dont have an account?</Typography>{" "}
+            <Button onClick={() => navigate("/sign-up")}>Signup</Button>
+          </Box>
         </form>
       </Box>
     </Box>
