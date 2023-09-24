@@ -8,6 +8,7 @@ import HeaderComponent from "./components/header.comonent";
 import { Box } from "@mui/material";
 import AddProduct from "./pages/addProduct.page";
 import AuthRoute from "./utils/authRoute";
+import EditProduct from "./pages/editProduct.page";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route element={<AuthRoute />}>
             <Route path="/all-products" element={<AllProducts />} />
             <Route path="/my-products" element={<MyProducts />} />
+            <Route path="/my-products/:productId" element={<EditProduct />} />
             <Route path="/add-product" element={<AddProduct />} />
           </Route>
         </Routes>

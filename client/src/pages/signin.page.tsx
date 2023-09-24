@@ -5,17 +5,7 @@ import { Controller, useForm } from "react-hook-form";
 import { gql, useQuery } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 import LoadingComponent from "../components/loading.component";
-
-const LOGIN_USER = gql`
-  query LoginUser($email: String!, $password: String!) {
-    loginUser(email: $email, password: $password) {
-      id
-      firstName
-      lastName
-      email
-    }
-  }
-`;
+import { LOGIN_USER } from "../constants/constants";
 
 const LoginPage = () => {
   const navigate = useNavigate();

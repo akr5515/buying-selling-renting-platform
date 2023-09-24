@@ -3,31 +3,7 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-
-const SIGN_UP_USER = gql`
-  mutation createUser(
-    $firstName: String!
-    $lastName: String!
-    $email: String!
-    $address: String!
-    $phone: String!
-    $password: String!
-  ) {
-    createUser(
-      firstName: $firstName
-      lastName: $lastName
-      email: $email
-      address: $address
-      phone: $phone
-      password: $password
-    ) {
-      id
-      firstName
-      lastName
-      email
-    }
-  }
-`;
+import { SIGN_UP_USER } from "../constants/constants";
 
 const SignUpPage = () => {
   const navigate = useNavigate();

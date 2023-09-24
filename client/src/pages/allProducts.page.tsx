@@ -3,25 +3,7 @@ import "./allProducts.style.scss";
 import { gql, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import CardComponent from "../components/card.component";
-
-const ALL_PRODUCTS = gql`
-  query GetProducts {
-    getProducts {
-      id
-      title
-      description
-      categories {
-        id
-      }
-      price
-      rent
-      rentInterval
-      createdAt
-      updatedAt
-      ownerId
-    }
-  }
-`;
+import { ALL_PRODUCTS } from "../constants/constants";
 
 const AllProducts = () => {
   const [productsData, setProductsData] = useState([]);

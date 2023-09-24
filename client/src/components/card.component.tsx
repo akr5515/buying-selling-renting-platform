@@ -7,8 +7,10 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const CardComponent = ({ productData }) => {
+  const navigate = useNavigate();
   console.log("Product from card", productData);
   return (
     <Box className="card-container">
@@ -18,7 +20,10 @@ const CardComponent = ({ productData }) => {
             <Box>
               <Typography variant="h5">{productData.title}</Typography>
             </Box>
-            <Box>Delete</Box>
+            <Button onClick={() => navigate(`/my-products/${productData.id}`)}>
+              Edit
+            </Button>
+            <Button>Delete</Button>
           </Box>
           <Box>
             <Typography>The categories</Typography>
