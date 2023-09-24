@@ -29,13 +29,14 @@ const ProductDetails = () => {
         <Box>
           <Typography>
             Categories:{" "}
-            {productData.categories.map((category, i) => {
-              return (
-                <span key={category.id}>
-                  {i > 0 ? ", " : ""} {category.name}
-                </span>
-              );
-            })}
+            {productData.categories &&
+              productData.categories.map((category, i) => {
+                return (
+                  <span key={category.id}>
+                    {i > 0 ? ", " : ""} {category.name}
+                  </span>
+                );
+              })}
           </Typography>
         </Box>
         <Box>
