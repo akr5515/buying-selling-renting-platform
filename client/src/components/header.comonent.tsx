@@ -7,7 +7,7 @@ const HeaderComponent = () => {
   const navItems = [
     { name: "All Products", path: "/all-products" },
     { name: "My Products", path: "/my-products" },
-    { name: "Logout", path: "/" },
+    { name: "Logout", path: "/sign-in" },
   ];
 
   return (

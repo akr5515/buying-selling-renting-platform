@@ -3,6 +3,7 @@ import "./myProducts.style.scss";
 import { gql, useQuery } from "@apollo/client";
 import { useState } from "react";
 import CardComponent from "../components/card.component";
+import { useNavigate } from "react-router-dom";
 
 const ALL_PRODUCTS = gql`
   query GetProducts {
@@ -24,6 +25,7 @@ const ALL_PRODUCTS = gql`
 `;
 
 const MyProducts = () => {
+  const navigate = useNavigate();
   const [productsData, setProductsData] = useState([]);
 
   const { loading, error, data, refetch } = useQuery(ALL_PRODUCTS, {
@@ -38,7 +40,7 @@ const MyProducts = () => {
       <Box className="login-container">
         <Box>
           <Typography variant="h4">My Products</Typography>{" "}
-          <Button>Add Product</Button>
+          <Button onClick={() => navigate("/add-product")}>Add Product</Button>
         </Box>
         <Box>
           {productsData.length > 0 &&
