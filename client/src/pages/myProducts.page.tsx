@@ -49,7 +49,9 @@ const MyProducts = () => {
           {productsData.length > 0 &&
             productsData.map((product) => {
               console.log(product);
-              return <CardComponent productData={product} />;
+              return (
+                <CardComponent productData={product} pageSrc="my-products" />
+              );
             })}
         </Box>
       </Box>

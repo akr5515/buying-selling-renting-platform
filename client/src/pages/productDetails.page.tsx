@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import CardComponent from "../components/card.component";
 import { ALL_PRODUCTS } from "../constants/constants";
 
-const AllProducts = () => {
+const ProductDetails = () => {
   const [productsData, setProductsData] = useState([]);
 
   const { loading, error, data, refetch } = useQuery(ALL_PRODUCTS, {
@@ -18,22 +18,7 @@ const AllProducts = () => {
   }, []);
 
   console.log("The products data ", productsData, " error ", error);
-  return (
-    <Box className="container">
-      <Box className="login-container">
-        <Typography variant="h4">All Products</Typography>
-        <Box>
-          {productsData.length > 0 &&
-            productsData.map((product) => {
-              console.log(product);
-              return (
-                <CardComponent productData={product} pageSrc="all-products" />
-              );
-            })}
-        </Box>
-      </Box>
-    </Box>
-  );
+  return <Box className="container">Product Details are here</Box>;
 };
 
-export default AllProducts;
+export default ProductDetails;
