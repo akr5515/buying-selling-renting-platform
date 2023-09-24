@@ -27,7 +27,7 @@ const HeaderComponent = () => {
           component="div"
           sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
         >
-          MUI
+          TeeBay
         </Typography>
         <Box sx={{ display: { xs: "none", sm: "block" } }}>
           {navItems.map((item, i) => (
@@ -36,6 +36,9 @@ const HeaderComponent = () => {
               sx={{ color: "#fff" }}
               onClick={() => {
                 navigate(item.path);
+                if (item.name === "Logout") {
+                  localStorage.removeItem("userId");
+                }
               }}
             >
               {item.name}

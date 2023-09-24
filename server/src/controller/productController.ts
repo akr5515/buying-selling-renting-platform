@@ -1,17 +1,25 @@
 import prisma from "../config/database";
 
 class productController {
-  async createProduct(input) {
-    const {
-      title,
-      description,
-      categories,
-      price,
-      rent,
-      rentInterval,
-      ownerId,
-    } = input;
-    console.log("the input is ", input);
+  async createProduct(
+    title,
+    description,
+    categories,
+    price,
+    rent,
+    rentInterval,
+    ownerId
+  ) {
+    // const {
+    //   title,
+    //   description,
+    //   categories,
+    //   price,
+    //   rent,
+    //   rentInterval,
+    //   ownerId,
+    // } = input;
+    // console.log("the input is ", input);
     const product = await prisma.product.create({
       data: {
         title,
@@ -70,6 +78,9 @@ class productController {
 
   async getAllProducts() {
     const productsList = await prisma.product.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
       include: {
         categories: true,
         owner: true,
@@ -109,7 +120,7 @@ class productController {
   }
   async getAllCategories() {
     const categoriesData = await prisma.category.findMany();
-    console.log("The categories", categoriesData);
+    // console.log("The categories", categoriesData);
     return categoriesData;
   }
 

@@ -100,7 +100,15 @@ type Mutation {
     phone: String!
     password: String!
   ): User
-  createProduct(input: ProductInput!): Product!
+  createProduct(
+    title: String!
+    description: String!
+    categories: [Int!]
+    price: Float!
+    rent: Float!
+    rentInterval: String!
+    ownerId: String!
+  ): Product!
   createCategory(name: String!, productId: ID): Category
   buyProduct(userId: String!, productId: String!): Purchase!
   rentProduct(

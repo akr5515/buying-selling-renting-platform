@@ -3,11 +3,22 @@ import UserController from "../controller/userController";
 
 const customResolvers = {
   Mutation: {
-    createProduct: async (parent, { input }) => {
+    createProduct: async (
+      parent,
+      { title, description, categories, price, rent, rentInterval, ownerId }
+    ) => {
       // console.log(parent);
       // return { name, price };
 
-      const data = await ProductController.createProduct(input);
+      const data = await ProductController.createProduct(
+        title,
+        description,
+        categories,
+        price,
+        rent,
+        rentInterval,
+        ownerId
+      );
       return data;
     },
     createUser: async (

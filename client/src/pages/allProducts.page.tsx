@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import "./allProducts.style.scss";
 import { gql, useQuery } from "@apollo/client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CardComponent from "../components/card.component";
 
 const ALL_PRODUCTS = gql`
@@ -31,6 +31,9 @@ const AllProducts = () => {
       setProductsData(data.getProducts);
     },
   });
+  useEffect(() => {
+    refetch();
+  }, []);
 
   console.log("The products data ", productsData, " error ", error);
   return (

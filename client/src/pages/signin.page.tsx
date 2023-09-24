@@ -1,5 +1,5 @@
 import React from "react";
-import "./login.style.scss";
+import "./signin.style.scss";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { gql, useQuery } from "@apollo/client";
@@ -31,6 +31,10 @@ const LoginPage = () => {
       const loginData = await refetch({ email, password });
 
       console.log("The login user", loginData.data);
+      localStorage.setItem(
+        "userId",
+        loginData.data.loginUser.id ? loginData.data.loginUser.id : ""
+      );
     } catch (error) {
       console.log("Some error occured", error);
     }
