@@ -30,7 +30,7 @@ const CardComponent = ({ productData, pageSrc }) => {
               <Typography variant="h5">{productData.title}</Typography>
             </Box>
 
-            <Button>Delete</Button>
+            {pageSrc !== "all-products" && <Button>Delete</Button>}
           </Box>
           <Box>
             <Typography>The categories</Typography>

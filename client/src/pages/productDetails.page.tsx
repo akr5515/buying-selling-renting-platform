@@ -1,9 +1,18 @@
-import { Box, Button, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Typography,
+} from "@mui/material";
 import "./allProducts.style.scss";
 import { gql, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { GET_PRODUCT_BY_ID } from "../constants/constants";
 import { useParams } from "react-router-dom";
+import CustomDialog from "../components/dialog.component";
 
 const ProductDetails = () => {
   const [productData, setProductData] = useState([]);
@@ -16,10 +25,11 @@ const ProductDetails = () => {
       setProductData(data.getProductById);
     },
   });
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const onDialogClose = () => {
+    setIsDialogOpen(false);
+  };
 
-  console.log("Product data", data, " and the set data is ", productData);
-
-  // console.log("The products data ", productsData, " error ", error);
   return (
     <Box className="container">
       <Box>
@@ -46,10 +56,18 @@ const ProductDetails = () => {
           <Typography>Description: {productData.description}</Typography>
         </Box>
         <Box>
-          <Button variant="contained">Buy</Button>
+          <Button variant="contained" onClick={() => setIsDialogOpen(true)}>
+            Buy
+          </Button>
           <Button variant="contained">Rent</Button>
         </Box>
       </Box>
+
+      <CustomDialog
+        isDialogOpen={isDialogOpen}
+        onDialogClose={onDialogClose}
+        description="Are you sure you want to buy this product?"
+      />
     </Box>
   );
 };
