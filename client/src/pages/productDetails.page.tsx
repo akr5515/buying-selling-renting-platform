@@ -1,24 +1,56 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import "./allProducts.style.scss";
 import { gql, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
-import CardComponent from "../components/card.component";
-import { ALL_PRODUCTS } from "../constants/constants";
+import { GET_PRODUCT_BY_ID } from "../constants/constants";
+import { useParams } from "react-router-dom";
 
 const ProductDetails = () => {
-  const [productsData, setProductsData] = useState([]);
+  const [productData, setProductData] = useState([]);
 
-  const { loading, error, data, refetch } = useQuery(ALL_PRODUCTS, {
+  const { productId } = useParams();
+
+  const { loading, error, data, refetch } = useQuery(GET_PRODUCT_BY_ID, {
+    variables: { productId: productId },
     onCompleted: (data) => {
-      setProductsData(data.getProducts);
+      setProductData(data.getProductById);
     },
   });
-  useEffect(() => {
-    refetch();
-  }, []);
 
-  console.log("The products data ", productsData, " error ", error);
-  return <Box className="container">Product Details are here</Box>;
+  console.log("Product data", data, " and the set data is ", productData);
+
+  // console.log("The products data ", productsData, " error ", error);
+  return (
+    <Box className="container">
+      <Box>
+        <Box>
+          <Typography variant="h4">{productData.title}</Typography>
+        </Box>
+        <Box>
+          <Typography>
+            Categories:{" "}
+            {productData.categories.map((category, i) => {
+              return (
+                <span key={category.id}>
+                  {i > 0 ? ", " : ""} {category.name}
+                </span>
+              );
+            })}
+          </Typography>
+        </Box>
+        <Box>
+          <Typography>Price: {productData.price}</Typography>
+        </Box>
+        <Box>
+          <Typography>Description: {productData.description}</Typography>
+        </Box>
+        <Box>
+          <Button variant="contained">Buy</Button>
+          <Button variant="contained">Rent</Button>
+        </Box>
+      </Box>
+    </Box>
+  );
 };
 
 export default ProductDetails;
