@@ -7,7 +7,12 @@ import {
 } from "@mui/material";
 import React from "react";
 
-const CustomDialog = ({ isDialogOpen, onDialogClose, description }) => {
+const CustomDialog = ({
+  isDialogOpen,
+  onDialogClose,
+  description,
+  onClickYes,
+}) => {
   return (
     <Box>
       <Dialog open={isDialogOpen} onClose={onDialogClose}>
@@ -16,7 +21,7 @@ const CustomDialog = ({ isDialogOpen, onDialogClose, description }) => {
           <Button onClick={onDialogClose} color="primary">
             No
           </Button>
-          <Button onClick={() => {}} color="primary">
+          <Button onClick={onClickYes} color="primary">
             Yes
           </Button>
         </DialogActions>

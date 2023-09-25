@@ -75,8 +75,8 @@ type Rental {
   productId: ID!
   product: Product!
   startDate: String!
-  endDate: Date!
-  createdAt: Date!
+  endDate: String!
+  createdAt: String!
 }
 
 type Query {

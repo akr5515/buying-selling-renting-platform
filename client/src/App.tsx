@@ -10,6 +10,8 @@ import AddProduct from "./pages/addProduct.page";
 import AuthRoute from "./utils/authRoute";
 import EditProduct from "./pages/editProduct.page";
 import ProductDetails from "./pages/productDetails.page";
+import PurchasedProducts from "./pages/my-history/components/purchasedProducts.component";
+import MyHistoryPage from "./pages/my-history/myHistory.page";
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
       <HeaderComponent />
       <Box sx={{ marginTop: "100px" }}>
         <Routes>
+          <Route path="/" element={<LoginPage />} />
           <Route path="/sign-in" element={<LoginPage />} />
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route element={<AuthRoute />}>
@@ -28,6 +31,8 @@ function App() {
             <Route path="/my-products" element={<MyProducts />} />
             <Route path="/my-products/:productId" element={<EditProduct />} />
             <Route path="/add-product" element={<AddProduct />} />
+            <Route path="/purchased-products" element={<PurchasedProducts />} />
+            <Route path="/my-history" element={<MyHistoryPage />} />
           </Route>
         </Routes>
       </Box>

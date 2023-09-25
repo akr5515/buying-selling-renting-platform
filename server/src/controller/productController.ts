@@ -10,16 +10,6 @@ class productController {
     rentInterval,
     ownerId
   ) {
-    // const {
-    //   title,
-    //   description,
-    //   categories,
-    //   price,
-    //   rent,
-    //   rentInterval,
-    //   ownerId,
-    // } = input;
-    // console.log("the input is ", input);
     const product = await prisma.product.create({
       data: {
         title,
@@ -124,8 +114,7 @@ class productController {
     return categoriesData;
   }
 
-  async buyProduct(input) {
-    const { userId, productId } = input;
+  async buyProduct(userId, productId) {
     const productData = await prisma.purchase.create({
       data: {
         user: { connect: { id: userId } },
@@ -136,12 +125,11 @@ class productController {
         product: true,
       },
     });
-    console.log("The productData ", productData);
+    console.log("The purchaseData ", productData);
     return productData;
   }
 
-  async rentProduct(input) {
-    const { userId, productId, startDate, endDate } = input;
+  async rentProduct(userId, productId, startDate, endDate) {
     const productData = await prisma.rental.create({
       data: {
         user: { connect: { id: userId } },
@@ -163,7 +151,11 @@ class productController {
       where: {
         userId,
       },
+      orderBy: {
+        createdAt: "desc",
+      },
       include: {
+        user: true,
         product: {
           include: {
             categories: true,
@@ -194,7 +186,7 @@ class productController {
         },
       },
     });
-    console.log("The products list: ", productsList);
+    console.log("The sold list: ", productsList);
     return productsList;
   }
 
@@ -221,9 +213,14 @@ class productController {
   }
 
   async productsRentedByUser(userId) {
+    console.log("The userId ", userId);
+
     const productsList = await prisma.rental.findMany({
       where: {
         userId,
+      },
+      orderBy: {
+        createdAt: "desc",
       },
       include: {
         product: {

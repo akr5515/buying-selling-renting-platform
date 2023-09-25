@@ -26,7 +26,7 @@ const SignUpPage = () => {
     const { firstName, lastName, email, phoneNumber, address, password } = data;
 
     console.log(data);
-    await createUser({
+    const userData = await createUser({
       variables: {
         firstName,
         lastName,
@@ -36,6 +36,10 @@ const SignUpPage = () => {
         password,
       },
     });
+
+    if (userData) {
+      navigate("/sign-in");
+    }
   };
 
   return (

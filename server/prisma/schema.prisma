@@ -32,8 +32,8 @@ model Rental {
   product   Product  @relation(fields: [productId], references: [id])
   productId String
   createdAt DateTime @default(now())
-  startDate DateTime
-  endDate   DateTime
+  startDate String
+  endDate   String
 }
 
 model Product {

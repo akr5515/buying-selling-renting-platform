@@ -41,6 +41,21 @@ const customResolvers = {
 
       return data;
     },
+    buyProduct: async (parent, { userId, productId }) => {
+      const data = await ProductController.buyProduct(userId, productId);
+
+      return data;
+    },
+    rentProduct: async (parent, { userId, productId, startDate, endDate }) => {
+      const data = await ProductController.rentProduct(
+        userId,
+        productId,
+        startDate,
+        endDate
+      );
+
+      return data;
+    },
   },
 
   Query: {
@@ -64,6 +79,26 @@ const customResolvers = {
     },
     getCategories: async () => {
       const data = await ProductController.getAllCategories();
+      return data;
+    },
+    productsPurchasedByUser: async (_, args) => {
+      const { userId } = args;
+      const data = await ProductController.productPurchased(userId);
+      return data;
+    },
+    productsSoldByUser: async (_, args) => {
+      const { userId } = args;
+      const data = await ProductController.productsSoldByUser(userId);
+      return data;
+    },
+    productsRentedByUser: async (_, args) => {
+      const { userId } = args;
+      const data = await ProductController.productsRentedByUser(userId);
+      return data;
+    },
+    productsLentByUser: async (_, args) => {
+      const { userId } = args;
+      const data = await ProductController.productsLentByUser(userId);
       return data;
     },
   },

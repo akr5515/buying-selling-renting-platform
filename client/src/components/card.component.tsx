@@ -9,20 +9,22 @@ import {
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const CardComponent = ({ productData, pageSrc }) => {
+const CardComponent = ({ productData, pageSrc = "" }) => {
   const navigate = useNavigate();
   console.log("Product from card", productData);
   return (
     <Box className="card-container">
       <Card
         sx={{ minWidth: 275 }}
-        onClick={() =>
-          navigate(
-            pageSrc === "all-products"
-              ? `/all-products/${productData.id}`
-              : `/my-products/${productData.id}`
-          )
-        }
+        onClick={() => {
+          if (pageSrc) {
+            navigate(
+              pageSrc === "all-products"
+                ? `/all-products/${productData.id}`
+                : `/my-products/${productData.id}`
+            );
+          }
+        }}
       >
         <CardContent>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>

@@ -22,8 +22,8 @@ CREATE TABLE "Rental" (
     "userId" TEXT NOT NULL,
     "productId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "startDate" TIMESTAMP(3) NOT NULL,
-    "endDate" TIMESTAMP(3) NOT NULL,
+    "startDate" TEXT NOT NULL,
+    "endDate" TEXT NOT NULL,
 
     CONSTRAINT "Rental_pkey" PRIMARY KEY ("id")
 );
