@@ -4,7 +4,7 @@ import { Box, Button } from "@mui/material";
 import { useState } from "react";
 import SoldProducts from "./components/soldProducts.component";
 import RentedProducts from "./components/rentedProducts.component";
-import LentProducts from "./components/lentProducts.comonent";
+import LentProducts from "./components/lentProducts.component";
 
 const MyHistoryPage = () => {
   const navItems = [
