@@ -137,165 +137,211 @@ const AddProduct = () => {
           className="login-input-containers"
           onSubmit={handleSubmit((data) => onClickHandler(data))}
         >
-          {pageNumber === 0 && (
-            <Box>
-              <Typography>Select a title for your product</Typography>
-              <Controller
-                control={control}
-                name="title"
-                rules={{ required: "Title is required" }}
-                render={({ field, fieldState }) => (
-                  <TextField
-                    label="Title"
-                    className="text-input"
-                    {...field}
-                    error={!!fieldState.error}
-                    helperText={
-                      fieldState.error ? fieldState.error.message : null
-                    }
-                  />
-                )}
-              />
-            </Box>
-          )}
-          {pageNumber === 1 && (
-            <Box>
-              <Typography>Select categories</Typography>
-              <Controller
-                name="categories"
-                control={control}
-                defaultValue={[]}
-                rules={{ required: "Category is required" }}
-                render={({ field, fieldState }) => (
-                  <FormControl style={{ width: "20rem" }}>
-                    <InputLabel>Categories</InputLabel>
-                    <Select
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            {pageNumber === 0 && (
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <Typography variant="h4">
+                  Select a title for your product
+                </Typography>
+                <Controller
+                  control={control}
+                  name="title"
+                  rules={{ required: "Title is required" }}
+                  render={({ field, fieldState }) => (
+                    <TextField
+                      label="Title"
+                      className="text-input"
+                      sx={{ marginTop: "10px", width: "70%" }}
+                      required
                       {...field}
-                      labelId="age"
-                      label="age"
-                      multiple
-                      defaultValue={[]}
                       error={!!fieldState.error}
-                      // helperText={
-                      //   fieldState.error ? fieldState.error.message : null
-                      // }
-                    >
-                      {categories.length &&
-                        categories.map(
-                          (category: { id: number; name: string }) => (
-                            <MenuItem value={category.id} key={category.id}>
-                              {category.name}
-                            </MenuItem>
-                          )
-                        )}
-                    </Select>
-                  </FormControl>
-                )}
-              />
-            </Box>
-          )}
-          {pageNumber === 2 && (
-            <Box>
-              <Typography>Select description</Typography>
-              <Controller
-                control={control}
-                name="description"
-                rules={{ required: "Provide some description" }}
-                render={({ field, fieldState }) => (
-                  <TextField
-                    label="Description"
-                    className="text-input"
-                    {...field}
-                    error={!!fieldState.error}
-                    helperText={
-                      fieldState.error ? fieldState.error.message : null
-                    }
-                  />
-                )}
-              />
-            </Box>
-          )}
-
-          {pageNumber === 3 && (
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography>Select price</Typography>
-
-              <Controller
-                control={control}
-                name="price"
-                render={({ field }) => (
-                  <TextField label="Price" className="text-input" {...field} />
-                )}
-              />
-              <Controller
-                control={control}
-                name="rent"
-                render={({ field }) => (
-                  <TextField label="Rent" className="text-input" {...field} />
-                )}
-              />
-              <Controller
-                name="rentInterval"
-                control={control}
-                defaultValue=""
-                render={({ field }) => (
-                  <FormControl style={{ width: "20rem" }}>
-                    <InputLabel>Rent Interval</InputLabel>
-                    <Select
-                      {...field}
-                      labelId="rentInterval"
-                      label="rentInterval"
-                      defaultValue=""
-                    >
-                      {rentIntervals.map((rentInterval) => (
-                        <MenuItem value={rentInterval} key={rentInterval}>
-                          {rentInterval}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                )}
-              />
-            </Box>
-          )}
-          {pageNumber === 4 && (
-            <Box>
-              <Typography variant="h5">Summary</Typography>
-              <Typography>Title: {getValues("title")}</Typography>
-              <Typography>Categories: {getValues("categories")}</Typography>
-              <Typography>Description: {getValues("description")}</Typography>
-              <Typography>Price: {getValues("price")}</Typography>
-              <Typography>Rent: {getValues("rent")}</Typography>
-            </Box>
-          )}
-          <Box>
-            {pageNumber > 0 && (
-              <Button
-                variant="contained"
-                style={{ marginTop: "20px" }}
-                onClick={backBtnHandler}
-              >
-                Back
-              </Button>
+                      helperText={
+                        fieldState.error ? fieldState.error.message : null
+                      }
+                    />
+                  )}
+                />
+              </Box>
             )}
-            {pageNumber < 4 && (
-              <Button
-                variant="contained"
-                style={{ marginTop: "20px" }}
-                onClick={nextBtnHandler}
+            {pageNumber === 1 && (
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
               >
-                Next
-              </Button>
+                <Typography variant="h4">Select categories</Typography>
+                <Controller
+                  name="categories"
+                  control={control}
+                  defaultValue={[]}
+                  rules={{ required: "Category is required" }}
+                  render={({ field, fieldState }) => (
+                    <FormControl
+                      style={{ minWidth: "20rem", marginTop: "10px" }}
+                    >
+                      <InputLabel>Categories</InputLabel>
+                      <Select
+                        {...field}
+                        labelId="age"
+                        label="age"
+                        required
+                        multiple
+                        defaultValue={[]}
+                        error={!!fieldState.error}
+                        // helperText={
+                        //   fieldState.error ? fieldState.error.message : null
+                        // }
+                      >
+                        {categories.length &&
+                          categories.map(
+                            (category: { id: number; name: string }) => (
+                              <MenuItem value={category.id} key={category.id}>
+                                {category.name}
+                              </MenuItem>
+                            )
+                          )}
+                      </Select>
+                    </FormControl>
+                  )}
+                />
+              </Box>
+            )}
+            {pageNumber === 2 && (
+              <Box>
+                <Typography>Select description</Typography>
+                <Controller
+                  control={control}
+                  name="description"
+                  rules={{ required: "Provide some description" }}
+                  render={({ field, fieldState }) => (
+                    <TextField
+                      label="Description"
+                      required
+                      multiline
+                      className="text-input"
+                      {...field}
+                      error={!!fieldState.error}
+                      helperText={
+                        fieldState.error ? fieldState.error.message : null
+                      }
+                    />
+                  )}
+                />
+              </Box>
+            )}
+
+            {pageNumber === 3 && (
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                <Typography>Select price</Typography>
+
+                <Controller
+                  control={control}
+                  name="price"
+                  render={({ field }) => (
+                    <TextField
+                      label="Price"
+                      required
+                      className="text-input"
+                      {...field}
+                    />
+                  )}
+                />
+                <Controller
+                  control={control}
+                  name="rent"
+                  render={({ field }) => (
+                    <TextField
+                      label="Rent"
+                      required
+                      className="text-input"
+                      {...field}
+                    />
+                  )}
+                />
+                <Controller
+                  name="rentInterval"
+                  control={control}
+                  defaultValue=""
+                  render={({ field }) => (
+                    <FormControl style={{ width: "20rem" }}>
+                      <InputLabel>Rent Interval</InputLabel>
+                      <Select
+                        {...field}
+                        labelId="rentInterval"
+                        label="rentInterval"
+                        required
+                        defaultValue=""
+                      >
+                        {rentIntervals.map((rentInterval) => (
+                          <MenuItem value={rentInterval} key={rentInterval}>
+                            {rentInterval}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  )}
+                />
+              </Box>
             )}
             {pageNumber === 4 && (
-              <Button
-                variant="contained"
-                type="submit"
-                style={{ marginTop: "20px" }}
-              >
-                Submit
-              </Button>
+              <Box>
+                <Typography variant="h5">Summary</Typography>
+                <Typography>Title: {getValues("title")}</Typography>
+                <Typography>Categories: {getValues("categories")}</Typography>
+                <Typography>Description: {getValues("description")}</Typography>
+                <Typography>Price: {getValues("price")}</Typography>
+                <Typography>Rent: {getValues("rent")}</Typography>
+              </Box>
             )}
+            <Box
+              sx={{
+                width: "40%",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              {pageNumber > 0 && (
+                <Button
+                  variant="contained"
+                  style={{ marginTop: "20px" }}
+                  onClick={backBtnHandler}
+                >
+                  Back
+                </Button>
+              )}
+              {pageNumber < 4 && (
+                <Button
+                  variant="contained"
+                  style={{ marginTop: "20px" }}
+                  onClick={nextBtnHandler}
+                >
+                  Next
+                </Button>
+              )}
+              {pageNumber === 4 && (
+                <Button
+                  variant="contained"
+                  type="submit"
+                  style={{ marginTop: "20px" }}
+                >
+                  Submit
+                </Button>
+              )}
+            </Box>
           </Box>
         </form>
       </Box>

@@ -15,6 +15,7 @@ import LoadingComponent from "../components/loading.component";
 import { LOGIN_USER } from "../constants/constants";
 import CustomSnackbar from "../components/customSnackbar.component";
 import { SnackbarContext } from "../App";
+import PasswordInput from "../components/passwordInput.component";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -80,7 +81,12 @@ const LoginPage = () => {
               name="email"
               defaultValue={""}
               render={({ field }) => (
-                <TextField label="Email" className="text-input" {...field} />
+                <TextField
+                  label="Email"
+                  className="text-input"
+                  required
+                  {...field}
+                />
               )}
             />
             <Controller
@@ -88,7 +94,7 @@ const LoginPage = () => {
               name="password"
               defaultValue={""}
               render={({ field }) => (
-                <TextField label="Password" className="text-input" {...field} />
+                <PasswordInput label="Password" {...field} />
               )}
             />
           </Box>

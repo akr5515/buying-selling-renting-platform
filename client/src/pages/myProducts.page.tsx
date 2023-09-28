@@ -43,7 +43,17 @@ const MyProducts = () => {
       <Box className="login-container">
         <Box>
           <Typography variant="h4">My Products</Typography>{" "}
-          <Button onClick={() => navigate("/add-product")}>Add Product</Button>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              margin: "10px 0px",
+            }}
+          >
+            <Button onClick={() => navigate("/add-product")} variant="outlined">
+              Add Product
+            </Button>
+          </Box>
         </Box>
         <Box>
           {productsData.length > 0 &&

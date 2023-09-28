@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import LoginPage from "./pages/signin.page";
 import SignUpPage from "./pages/signup.page";
 import AllProducts from "./pages/allProducts.page";
@@ -14,6 +14,7 @@ import PurchasedProducts from "./pages/my-history/components/purchasedProducts.c
 import MyHistoryPage from "./pages/my-history/myHistory.page";
 import { createContext, useEffect, useState } from "react";
 import CustomSnackbar from "./components/customSnackbar.component";
+import { getUserId } from "./utils/helpers";
 
 export const SnackbarContext = createContext();
 
@@ -21,12 +22,15 @@ function App() {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMsg, setSnackbarMsg] = useState("");
   const [alertColor, setAlertColor] = useState<AlertColor>("success");
+  const navigate = useNavigate();
+
+  const userId = getUserId();
 
   useEffect(() => {
     if (snackbarOpen) {
       setTimeout(() => {
         setSnackbarOpen(false);
-      }, 1200);
+      }, 2000);
     }
   }, [snackbarOpen]);
   const handleCloseSnackbar = (
@@ -37,7 +41,7 @@ function App() {
       return;
     }
 
-    setOpen(false);
+    setSnackbarOpen(false);
   };
 
   return (
@@ -48,9 +52,13 @@ function App() {
       >
         <Box sx={{ marginTop: "100px" }}>
           <Routes>
-            <Route path="/" element={<LoginPage />} />
-            <Route path="/sign-in" element={<LoginPage />} />
-            <Route path="/sign-up" element={<SignUpPage />} />
+            {!userId && (
+              <>
+                <Route path="/" element={<LoginPage />} />
+                <Route path="/sign-in" element={<LoginPage />} />
+                <Route path="/sign-up" element={<SignUpPage />} />
+              </>
+            )}
             <Route element={<AuthRoute />}>
               <Route path="/all-products" element={<AllProducts />} />
               <Route
