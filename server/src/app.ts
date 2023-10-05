@@ -44,39 +44,6 @@ async function main() {
     );
   });
 
-  // await UserController.createUser(
-  //   "Second User",
-  //   "Last ",
-  //   "b@gmail.com",
-  //   "some address",
-  //   "+990",
-  //   "123123"
-  // );
-
-  // await ProductController.createProduct({
-  //   title: "Third product",
-  //   description: "Second Description",
-  //   categories: [],
-  //   price: 11,
-  //   rent: 11,
-  //   rentInterval: "some time",
-  //   ownerId: "3021cf87-2c08-4307-b9c3-facef9e2b9f4",
-  // });
-
-  // await ProductController.createCategory("cars");
-  // await ProductController.getAllCategories();
-  // await ProductController.getAllProducts();
-
-  // await ProductController.updateProduct({
-  //   productId: "0dbb7126-67a8-40ba-852d-4e063de67be5",
-  //   title: "Updated product2",
-  //   description: "Second Description",
-  //   categories: [1, 3],
-  //   price: 11,
-  //   rent: 11,
-  //   rentInterval: "some time",
-  // });
-}
 
 main()
   .then(async () => {
