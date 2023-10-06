@@ -43,7 +43,7 @@ async function main() {
       `Application is running on ${process.env.PORT ? process.env.PORT : 8000}`
     );
   });
-
+}
 
 main()
   .then(async () => {
