@@ -1,8 +1,15 @@
 import prisma from "../config/database";
-
+import bcrypt from "bcrypt";
+import jsonwebtoken from "jsonwebtoken";
 class userController {
   async createUser(firstName, lastName, email, address, phone, password) {
     try {
+      const hashedPassword = await bcrypt
+        .hash(password, 10)
+        .then((hash) => hash);
+
+      // console.log("Password ", hashedPassword);
+
       const user = await prisma.user.create({
         data: {
           firstName: firstName,
@@ -10,7 +17,7 @@ class userController {
           email: email,
           address: address,
           phone: phone,
-          password: password,
+          password: hashedPassword,
         },
       });
       console.log("From controller ", user);
@@ -35,12 +42,20 @@ class userController {
       throw new Error("User not found");
     }
 
+    const checkedPassword = await bcrypt.compare(password, user.password);
+    console.log("The checkedPassword ", checkedPassword);
     // will add bcrypt & jwt later
-    if (user.password !== password) {
+    if (!checkedPassword) {
       throw new Error("Invalid password");
     }
 
-    return user;
+    delete user.password;
+
+    const jwt = jsonwebtoken.sign(user, "jsonwebtoken", { expiresIn: "1h" });
+
+    console.log("The user ", { ...user, token: jwt });
+
+    return { ...user, token: jwt };
   }
 }
 

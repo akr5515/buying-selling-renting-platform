@@ -13,6 +13,7 @@ type User {
   rentals: [Rental]
   createdAt: Date!
   updatedAt: Date!
+  token: String
 }
 
 input ProductInput {

@@ -20,7 +20,7 @@ const HeaderComponent = () => {
           component="div"
           sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
         >
-          TeeBay
+          LOGO
         </Typography>
         {userId && (
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
